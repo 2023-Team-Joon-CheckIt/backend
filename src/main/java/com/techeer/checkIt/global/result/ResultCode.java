@@ -23,6 +23,7 @@ public enum ResultCode {
     GET_NEW_BOOK_SUCCESS("B001","신규 도서 조회 성공"),
     UPDATE_BOOK_LIKE_SUCCESS("B002","좋아요 갱신 성공"),
     GET_ONE_BOOK_SUCCESS("B003","책 조회 성공"),
+    GET_LIKE_BOOK_SUCCESS("B004","인기있는 도서 조회 성공"),
 
 
     // Reading

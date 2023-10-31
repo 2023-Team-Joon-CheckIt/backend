@@ -8,7 +8,6 @@ import com.techeer.checkIt.domain.review.service.ReviewService;
 import com.techeer.checkIt.domain.user.entity.User;
 import com.techeer.checkIt.domain.user.entity.UserDetail;
 import com.techeer.checkIt.domain.user.service.UserService;
-import com.techeer.checkIt.global.result.ResultCode;
 import com.techeer.checkIt.global.result.ResultResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +24,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.techeer.checkIt.global.result.ResultCode.GET_REVIEW_SUCCESS;
+import static com.techeer.checkIt.global.result.ResultCode.REVIEW_CREATE_SUCCESS;
+import static com.techeer.checkIt.global.result.ResultCode.REVIEW_DELETE_SUCCESS;
+import static com.techeer.checkIt.global.result.ResultCode.REVIEW_UPDATE_SUCCESS;
 
 @Api(tags = "리뷰 API")
 @RestController
@@ -45,7 +49,7 @@ public class ReviewController {
     Book book = bookService.findById(createReviewReq.getBookId());
     reviewService.createReview(user, book, createReviewReq);
     ReviewRes reviewRes = reviewService.findReviewByUserNameIdBookId(user, createReviewReq.getBookId());
-    return ResponseEntity.ok(ResultResponse.of(ResultCode.REVIEW_CREATE_SUCCESS, reviewRes));
+    return ResponseEntity.ok(ResultResponse.of(REVIEW_CREATE_SUCCESS, reviewRes));
   }
 
   @ApiOperation(value = "리뷰 조회 API")
@@ -56,7 +60,7 @@ public class ReviewController {
   ){
     User user = userService.findUserByUsername(userDetail.getUsername());
     ReviewRes reviewRes = reviewService.findReviewByUserNameIdBookId(user, bookId);
-    return ResponseEntity.ok(ResultResponse.of(ResultCode.REVIEW_CREATE_SUCCESS, reviewRes));
+    return ResponseEntity.ok(ResultResponse.of(GET_REVIEW_SUCCESS, reviewRes));
   }
 
   @ApiOperation(value = "리뷰 삭제 API")
@@ -67,7 +71,7 @@ public class ReviewController {
   ){
     User user = userService.findUserByUsername(userDetail.getUsername());
     reviewService.deleteReview(user, bookId);
-    return ResponseEntity.ok(ResultResponse.of(ResultCode.REVIEW_DELETE_SUCCESS));
+    return ResponseEntity.ok(ResultResponse.of(REVIEW_DELETE_SUCCESS));
   }
 
   @ApiOperation(value = "리뷰 내용 변경 API")
@@ -79,7 +83,7 @@ public class ReviewController {
     User user = userService.findUserByUsername(userDetail.getUsername());
     reviewService.updateReview(user, createReviewReq);
     ReviewRes reviewRes = reviewService.findReviewByUserNameIdBookId(user, createReviewReq.getBookId());
-    return ResponseEntity.ok(ResultResponse.of(ResultCode.REVIEW_DELETE_SUCCESS, reviewRes));
+    return ResponseEntity.ok(ResultResponse.of(REVIEW_UPDATE_SUCCESS, reviewRes));
   }
 
 }

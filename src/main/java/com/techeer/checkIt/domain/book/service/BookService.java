@@ -38,13 +38,13 @@ public class BookService {
     public Page<BookSearchRes> sortedBooksByTime() {
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Order.desc("createdAt")));
         Page<BookDocument> newBooks = bookSearchRepository.findAll(pageRequest);
-        return bookMapper.toPageDtoList(newBooks);
+        return bookMapper.toBookSearchResDtoPage(newBooks);
     }
 
     public Page<BookSearchLikeRes> sortedBooksByLike() {
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Order.desc("likeCount")));
         Page<Book> newBooks = bookJpaRepository.findAll(pageRequest);
-        return bookMapper.toPageDtoList2(newBooks);
+        return bookMapper.BookSearchLikeResDtoPage(newBooks);
     }
 
     // id별 조회할 때

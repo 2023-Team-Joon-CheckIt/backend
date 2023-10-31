@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.techeer.checkIt.global.result.ResultCode.GET_LIKE_BOOK_SUCCESS;
 import static com.techeer.checkIt.global.result.ResultCode.GET_NEW_BOOK_SUCCESS;
 import static com.techeer.checkIt.global.result.ResultCode.UPDATE_BOOK_LIKE_SUCCESS;
 import static com.techeer.checkIt.global.result.ResultCode.GET_ONE_BOOK_SUCCESS;
@@ -72,6 +73,6 @@ public class BookController {
     @GetMapping("/like")
     public ResponseEntity<ResultResponse> getLikeBooksList() {
         Page<BookSearchLikeRes> books = bookService.sortedBooksByLike();
-        return ResponseEntity.ok(ResultResponse.of(GET_NEW_BOOK_SUCCESS, books));
+        return ResponseEntity.ok(ResultResponse.of(GET_LIKE_BOOK_SUCCESS, books));
     }
 }

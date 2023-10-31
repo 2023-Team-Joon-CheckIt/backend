@@ -1,5 +1,6 @@
 package com.techeer.checkIt.domain.book.mapper;
 
+import com.techeer.checkIt.domain.book.dto.Response.BookReadingRes;
 import com.techeer.checkIt.domain.book.dto.Response.BookRes;
 import com.techeer.checkIt.domain.book.dto.Response.BookSearchLikeRes;
 import com.techeer.checkIt.domain.book.dto.Response.BookSearchRes;
@@ -56,16 +57,27 @@ public class BookMapper {
                 .map(this::toBookSearchDto)
                 .collect(Collectors.toList());
     }
-    // toPageDtoList = toBookSearchResDtoPage
-    public Page<BookSearchRes> toPageDtoList(Page<BookDocument> books) {
+    public Page<BookSearchRes> toBookSearchResDtoPage(Page<BookDocument> books) {
         return new PageImpl<>(books.stream()
                 .map(this::toBookSearchDto)
                 .collect(Collectors.toList()));
     }
-    // toPageDtoList2 = BookSearchLikeResDtoPage
-    public Page<BookSearchLikeRes> toPageDtoList2(Page<Book> books) {
+    public Page<BookSearchLikeRes> BookSearchLikeResDtoPage(Page<Book> books) {
         return new PageImpl<>(books.stream()
             .map(this::toBookSearchLikeDto)
             .collect(Collectors.toList()));
+    }
+    public BookReadingRes toDtoByBook(Book book) {
+        return BookReadingRes.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .publisher(book.getPublisher())
+                .coverImageUrl(book.getCoverImageUrl())
+                .height(book.getHeight())
+                .width(book.getWidth())
+                .pages(book.getPages())
+                .likes(book.getLikeCount())
+                .build();
     }
 }

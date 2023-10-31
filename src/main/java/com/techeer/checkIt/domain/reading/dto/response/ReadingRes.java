@@ -1,5 +1,6 @@
 package com.techeer.checkIt.domain.reading.dto.response;
 
+import com.techeer.checkIt.domain.book.dto.Response.BookReadingRes;
 import com.techeer.checkIt.domain.book.dto.Response.BookRes;
 import com.techeer.checkIt.domain.reading.entity.ReadingStatus;
 import lombok.AccessLevel;
@@ -13,6 +14,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ReadingRes {
-    private List<BookRes> bookInfos;
+    private List<BookReadingRes> bookInfos;
     private ReadingStatus status;
 }
